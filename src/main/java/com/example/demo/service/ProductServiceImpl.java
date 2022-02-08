@@ -19,24 +19,19 @@ public class ProductServiceImpl implements ProductService {
     }
 
     public List<ProductDto> search(String searchCriteria) throws Exception {
-        try {
-            Long id = Long.valueOf(Integer.parseInt(searchCriteria));
-            List<ProductDto> searchResult = new ArrayList<>();
-            ProductDto searchResult2 = ProductMapper.convertFrom(productRepository.getById(id));
-            searchResult.add(searchResult2);
-            return searchResult;
-        }catch (Exception e){
-            try {
-                List<ProductDto> searchResult ;
-                searchResult = ProductMapper.convertFromList(productRepository.findAllByDescription(searchCriteria));
-                return searchResult;
-            }catch (Exception e2){
-                throw new Exception("Not found");
-            }
+        List<ProductDto> productDtoList = new ArrayList<>();
+        productDtoList=ProductMapper.convertFromList(productRepository.getAllByDescriptionOrCode(searchCriteria));
+        if (productDtoList.isEmpty()){
+            throw new Exception("Error no results found");
+        }
+        else {
+            return ProductMapper.convertFromList(productRepository.getAllByDescriptionOrCode(searchCriteria));
         }
     }
 
+
     public List<ProductDto> getAll() {
+
         return ProductMapper.convertFromList(productRepository.findAll());
     }
 

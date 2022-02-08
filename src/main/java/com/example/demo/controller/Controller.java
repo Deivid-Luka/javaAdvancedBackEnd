@@ -24,7 +24,7 @@ public class Controller {
         try{
             return ResponseEntity.ok(productService.search(searchCriteria));
         }catch (Exception e){
-            return ResponseEntity.status(33).body(e.getMessage());
+            return ResponseEntity.status(400).body(e.getMessage());
         }
     }
 

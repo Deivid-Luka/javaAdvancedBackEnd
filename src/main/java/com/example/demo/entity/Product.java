@@ -10,11 +10,11 @@ import javax.persistence.*;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false, name = "code")
+    @Column(unique = true, nullable = false, name = "id")
     private Long id;
 
-    @Column(nullable = false, name = "name")
-    private String name;
+    @Column(nullable = false, name = "code")
+    private String code;
 
     @Column(nullable = false, name = "amount")
     private int amount;
